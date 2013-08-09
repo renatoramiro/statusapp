@@ -7,17 +7,17 @@ An app to monitoring other apps.
 
 
 1. You need to clone
-       <tt>git clone https://github.com/renatoramiro/statusapp.git</tt>
+       git clone https://github.com/renatoramiro/statusapp.git
 
 2. Change directory to <tt>statusapp</tt> and start the web server:
-       <tt>cd statusapp</tt>
+       cd statusapp
 
 3. Create the database and migrate:
-       <tt>bundle exec rake db:create db:migrate</tt>
+       bundle exec rake db:create db:migrate>
 
 4. Start the web server, delayed_job and whenever
-        <tt>rails server</tt>
-        <tt>RAILS_ENV=development script/delayed_job start</tt>
-        <tt>whenever -w</tt>
+        rails server
+        RAILS_ENV=development script/delayed_job start
+        whenever -w
 
-5. Go to http://localhost:3000/
+5. Go to http://localhost:3000
