@@ -1,0 +1,104 @@
+<div class="tabbable"> <!-- Only required for left/right tabs -->
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#tab0" data-toggle="tab">Pings - Tabela</a></li>
+    <li><a href="#tab1" data-toggle="tab">Pings - Gráfico</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab0">
+      <div class="row">
+        <div class="span4">
+          <p><b>Nome:</b> <%= @site.name %></p>
+          <p><b>Site:</b> <%= link_to @site.url, @site.url, target: '_blank' %></p>
+          <p><b>Próximo ping: </b> <%= @site.next_ping_at.strftime("%d/%m/%Y - %H:%M") %></p>
+        </div>
+        <div class="span4">
+          <p><a href="https://support.google.com/webmasters/answer/40132?hl=pt-BR" target="_blank">Entenda qual o significado do status. <span class="badge badge-info">?</span></a></p>
+        </div>
+      </div>
+      <hr>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Tempo de Resposta</th>
+            <th>Realizado em</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @pings.each do |ping| %>
+          <tr>
+            <td><%= what_status(ping.status) %></td>
+            <td><%= ping.average_time.round(3) %> segundos</td>
+            <td><%= ping.created_at.strftime("%d/%m/%Y - %H:%M") %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <hr>
+      <%= will_paginate(@pings, :class => "pagination pagination-small pagination-centered", :previous_label => "« Anterior", :next_label => "Próxima »") %>
+      <%#= will_paginate @pings %>
+    </div>
+    <div class="tab-pane" id="tab1">
+      <div class="row">
+        <div class="span4">
+          <p><b>Próximo ping: </b> <%= @site.next_ping_at.strftime("%d/%m/%Y - %H:%M") %></p>
+        </div>
+      </div>
+      <hr>
+      <% unless @pings.empty? %>
+      <div id="container_ping" style="min-width: 100%; height: 400px; margin: 0 auto"></div>
+      <% else %>
+      <h4>Nenhum ping foi realizado até o momento.</h4>
+      <% end %>
+    </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+$(function () {
+        $('#container_ping').highcharts({
+            title: {
+                text: 'Tempo de Resposta',
+                x: -20 //center
+            },
+            subtitle: {
+                text: '<%= @site.url %>',
+                x: -20
+            },
+            xAxis: {
+                categories: [
+                <% @pings_graf.last(7).each do |ping| %>
+                  '<%= ping.created_at.strftime("%d/%m/%Y %H:%M") %>',
+                <% end %>
+                ]
+            },
+            yAxis: {
+                title: {
+                    text: 'Segundos (s)'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                valueSuffix: 's'
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: [{
+                name: '<%= @site.name %>',
+                data: [
+                <% @pings_graf.last(7).each do |ping| %>
+                  <%= ping.average_time.round(3) %>,
+                <% end %>
+                ]
+            }]
+        });
+    });
+    </script>

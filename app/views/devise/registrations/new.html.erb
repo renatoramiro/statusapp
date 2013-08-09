@@ -1,0 +1,17 @@
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: {class: 'form-signin'}) do |f| %>
+	<h2 class="form-signin-heading">Criar conta</h2>
+  <%= devise_error_messages! %>
+
+  Nome: <%= f.text_field :name, class: "input-block-level", placeholder: "Digite seu nome", :autofocus => true %>
+
+	Email: <%= f.email_field :email, class: "input-block-level", placeholder: "Digite seu email" %>
+
+  Senha: <%= f.password_field :password, class: "input-block-level", placeholder: "Digite uma senha" %>
+
+  Confimação da senha: <%= f.password_field :password_confirmation, class: "input-block-level", placeholder: "Digite a senha novamente" %>
+
+  <div><%= f.submit "Criar minha conta", class: "btn btn-large btn-primary" %></div>
+
+  <hr>
+  <%= render "devise/shared/links" %>
+<% end %>

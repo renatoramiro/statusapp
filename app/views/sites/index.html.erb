@@ -1,0 +1,31 @@
+<h3>Meus sites</h3>
+<% if current_user.sites.size < 3 %>
+  <p><i class="icon-unlock"></i> <%= link_to "Cadastrar novo site", new_site_path %></p>
+<% else %>
+  <p><i class="icon-lock"></i> <a href="#" class="link-disabled">Cadastrar novo site</a> <i style="padding-left: 7px;" class="icon-question-sign small_icons_orange" rel='tooltip' title="Você atingiu a quantidade máxima de sites cadastrados."></i></p>
+<% end %>
+<hr>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Url</th>
+      <th>Público?</th>
+      <th><span class="badge badge-info" rel='tooltip' title="Exibir informações do site">?</span></th>
+      <th><span class="badge badge-success" rel='tooltip' title="Editar informações do site">?</span></th>
+      <th><span class="badge badge-important" rel='tooltip' title="Excluir site do sistema">?</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sites.each do |site| %>
+    <tr>
+      <td><%= site.name %></td>
+      <td><%= site.url %></td>
+      <td><%= public(site) %></td>
+      <td><%= link_to "Exibir", site %></td>
+      <td><%= link_to "Editar", edit_site_path(site) %></td>
+      <td><%= link_to "Apagar", site, method: :delete, data: { confirm: 'Tem certeza que deseja apagar?'} %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

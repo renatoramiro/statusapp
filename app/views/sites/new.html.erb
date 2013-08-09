@@ -1,0 +1,10 @@
+<%= form_for(@site) do |f| %>
+	<fieldset>
+    <legend>Cadastrar novo site</legend>
+
+    <%= render partial: 'form', locals: { f: f } %>
+
+    <hr>
+	  <button type="submit" class="btn">Cadastrar</button> &nbsp; <%= link_to "Cancelar", sites_path, class: 'link-red' %>
+  </fieldset>
+<% end %>

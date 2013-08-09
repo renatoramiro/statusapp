@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Home &middot; StatusApp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+	  <%= javascript_include_tag "application" %>
+	  <%= javascript_include_tag "highcharts" %>
+	  <%= csrf_meta_tags %>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+	          <%= link_to root_path, class: 'max-brand' do %>
+	          	<i class="icon-th-large" style="padding-right: 10px; padding-top: 2px"></i> StatusApp <span class="beta">beta</span>
+	          <% end %>
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li><%= link_to 'Home', root_path %></li>
+              </ul>
+              <p class="pull-right navbar-text">
+                <%= link_to "Login", new_user_session_path, class: 'text-success' %> | 
+                <%= link_to "Criar Conta", new_user_registration_path, class: 'text-error' %>
+              </p>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+    	<% if alert %>
+	    	<div class="alert">
+				  <button type="button" class="close" data-dismiss="alert">&times;</button>
+				  <%= alert %>
+				</div>
+    	<% end %>
+    	<% if notice %>
+	    	<div class="alert alert-success">
+				  <button type="button" class="close" data-dismiss="alert">&times;</button>
+				  <%= notice %>
+				</div>
+    	<% end %>
+    	<%= yield %>
+
+    </div> <!-- /container -->
+
+    <section id="subfooter">
+      <div class="container">
+        <div class="row-fluid">
+          <div class="span4 wall_right">
+            <h4>Como foi construída?</h4>
+            <p>Esta aplicação foi desenvolvida com o uso do framework Ruby on Rails. Quer conhecer mais um pouco sobre Ruby on Rails? Clica <a href="http://www.rubyonrails.com.br" class="link-subfooter-red" target="_blank">aqui</a>.</p>
+            <p>E quer conhecer um pouco da linguagem Ruby? Clica <a href="http://www.ruby-lang.org/pt/" class="link-subfooter-blue" target="_blank">aqui</a>.</p>
+            <p><%= image_tag 'rails.png', size: '30x40', alt: 'Ruby on Rails' %></p>
+          </div>
+          <div class="span4 wall_right">
+            <h4>Quem está por trás disso?</h4>
+            <img class="image-subfooter-rounded" alt="Renato" style="width: 96px; height: 85px;" src="<%= image_path 'Renato2.jpg' %>">
+            <p><strong>Renato Ramiro</strong>, formado em Ciências da Computação, aficionado por tecnologia, linguagens de programação, desenvolvimento web, futebol.</p>
+            <p>Para entrar em contato: <a href="http://www.facebook.com/renatoramiro" class="link-subfooter-blue" target="_blank">facebook</a>, <a href="https://twitter.com/renatosramiro" class="link-subfooter-blue" target="_blank">twitter</a> ou no <a href="https://github.com/renatoramiro" class="link-subfooter-blue" target="_blank">github</a>.</p>
+          </div>
+          <div class="span4 wall_right">
+            <h4>Gostaria de ver o código-fonte?</h4>
+            <p>O código-fonte desta aplicação está todo no github. Pode olhar, sugerir alguma modificação, melhoria. Sinta-se a vontade.</p>
+            <p><a href="https://github.com/renatoramiro" class="btn" target="_blank"><i class="icon-github"></i> Ir para o <strong>github</strong></a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="span3">
+            <p>&copy; Todos os direitos reservados - <%= Time.now.year %></p>
+          </div>
+          <div class="offset6 span3">
+            <p>Desenvolvido por <a href="http://startupseven.net" class="link-green" target="_blank">StartupSeven.net</a></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
